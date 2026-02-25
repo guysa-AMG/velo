@@ -12,17 +12,30 @@ int main(int argc,char** argv){
         return -1;
     }
 
-    SDL_Window* window =  SDL_CreateWindow("const char *title", 500, 250, SDL_WINDOW_ALWAYS_ON_TOP);
+    SDL_Window* window =  SDL_CreateWindow("Welocome", 1500, 900, SDL_WINDOW_VULKAN|SDL_WINDOW_RESIZABLE);
 
 
 
     bool running = true;
     SDL_Event event = SDL_Event();
+
+    SDL_Renderer* render = SDL_CreateRenderer(window,NULL);
+
     while (running){
-        SDL_PollEvent(&event);
-        if (event.type == SDL_EventType::SDL_EVENT_QUIT){
+        while(SDL_PollEvent(&event))
+        {if (event.type == SDL_EventType::SDL_EVENT_QUIT){
             running=false;
-        }
+        }}
+        SDL_SetRenderDrawColor(render,255,255,255,SDL_ALPHA_OPAQUE);
+        
+        SDL_RenderClear(render);
+  
+        SDL_RenderPresent(render);
     }
+    SDL_DestroyRenderer(render);
+
+    SDL_DestroyWindow(window);
+
     log->fail("flow");
+    
 }
