@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <string.h>
-
+namespace VELO{
 class Log{
 
     public:
@@ -16,3 +16,4 @@ class Log{
 
         std::string red(std::string string);
 };
+}
