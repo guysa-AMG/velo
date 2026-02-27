@@ -15,4 +15,5 @@ void cleanup(){
 };
 int main(){
 MyGame* game =new MyGame();
+
 }

@@ -20,5 +20,5 @@ clean:
 
 run:
 	
-	g++ main.cpp -Ibuild/include -Ibuild/utils/include -Lbuild/lib -lvelo   -o build/game
+	g++ main.cpp -Ibuild/include -Ibuild/utils/include -Lbuild/lib -Lbuild/utils/lib   -lvelo -llogger -lSDL3   -o build/game
 	build/game

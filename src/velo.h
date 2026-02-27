@@ -12,33 +12,33 @@
 class Velo{
     
     private:
-    VELO::Log* velog;
-    SDL_Window* VeloWindow;
-    SDL_Renderer* VeloRender;
-    SDL_Event* VeloEvent;
-    bool runningState;
-    
-    void privateFrame();
+        VELO::Log* velog;
+        SDL_Window* VeloWindow;
+        SDL_Renderer* VeloRender;
+        SDL_Event* VeloEvent;
+        bool runningState;
+        
+        void privateFrame();
 
     public:
-    Velo(); 
-    virtual void on_init()=0;
+        Velo(); 
+        virtual void on_init()=0;
 
-    virtual void on_preFrame()=0;
+        virtual void on_preFrame()=0;
 
-    virtual void on_postFrame()=0;
+        virtual void on_postFrame()=0;
 
-    virtual void on_EveryFrame();
+        virtual void on_EveryFrame();
 
-    void registerComponent(Component comp);
+        void registerComponent(Component comp);
 
-    void setTitle(std::string title);
+        void setTitle(std::string title);
 
-    void setWindowSize(std::vector<int> sz);
+        void setWindowSize(std::vector<int> sz);
 
-    void currentBackgroundColour(uint r ,uint g,uint b ,uint a);
-    
-    virtual void cleanup()=0;
-    ~Velo();
-    
+        void currentBackgroundColour(uint r ,uint g,uint b ,uint a);
+        
+        virtual void cleanup()=0;
+        ~Velo();
+        
 };

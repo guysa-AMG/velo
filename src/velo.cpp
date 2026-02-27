@@ -6,7 +6,7 @@
 #include "velo.h"
 
 
-Velo::Velo(){
+ Velo::Velo(){
   velog = new VELO::Log();
 
     if (!SDL_Init(SDL_INIT_VIDEO)){
@@ -16,9 +16,20 @@ Velo::Velo(){
     runningState = true;
     VeloEvent = new SDL_Event();
     VeloRender = SDL_CreateRenderer(VeloWindow,NULL);
+    Velo::privateFrame();
 }
+void Velo::setTitle(std::string title){
 
+}
+void Velo::setWindowSize(std::vector<int> sz){
 
+}
+void Velo::currentBackgroundColour(uint r ,uint g,uint b,uint a){
+
+}
+void Velo::on_EveryFrame(){
+
+}
 void Velo::privateFrame(){
     while (runningState){
         on_preFrame();
@@ -35,10 +46,13 @@ void Velo::privateFrame(){
     }
 };
 
+void Velo::registerComponent(Component child){
+
+}
 
 Velo::~Velo(){
 
-cleanup();
+
 
 SDL_DestroyRenderer(VeloRender);
 
