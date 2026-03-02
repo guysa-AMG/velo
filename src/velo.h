@@ -7,14 +7,14 @@
 #include <iostream>
 #include "component.h"
 #include "logger.h"
-
+#include <memory>
 
 class Velo{
     
     private:
         VELO::Log* velog;
-        SDL_Window* VeloWindow;
-        SDL_Renderer* VeloRender;
+        std::unique_ptr<SDL_Window> VeloWindow;
+        std::unique_ptr<SDL_Renderer> VeloRender;
         SDL_Event* VeloEvent;
         bool runningState;
         

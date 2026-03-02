@@ -4,22 +4,29 @@
 #include <SDL3/SDL_video.h>
 #include <iostream>
 #include "velo.h"
-
+#include <memory>
 
  Velo::Velo(){
-  velog = new VELO::Log();
+  std::unique_ptr<VELO::Log> velog(new VELO::Log());
 
     if (!SDL_Init(SDL_INIT_VIDEO)){
         velog->fail("failed to initialize SDL3");
     }
-    VeloWindow =  SDL_CreateWindow("Welcome", 1500, 900, SDL_WINDOW_VULKAN|SDL_WINDOW_RESIZABLE);
+    VeloWindow(SDL_CreateWindow("Welcome", 1500, 900, SDL_WINDOW_VULKAN|SDL_WINDOW_RESIZABLE));
     runningState = true;
-    VeloEvent = new SDL_Event();
-    VeloRender = SDL_CreateRenderer(VeloWindow,NULL);
-    Velo::privateFrame();
+    VeloEvent(SDL_Event());
+     VeloRender(SDL_CreateRenderer(VeloWindow.get(),NULL));
+    
 }
-void Velo::setTitle(std::string title){
+void Velo::on_init(){
+velog->fail("calling super method");
 
+};
+void Velo::setTitle(std::string title){
+SDL_SetWindowTitle(VeloWindow,title.c_str());
+}
+void Velo::on_preFrame(){
+    velog->pass("base called");
 }
 void Velo::setWindowSize(std::vector<int> sz){
 
@@ -32,12 +39,13 @@ void Velo::on_EveryFrame(){
 }
 void Velo::privateFrame(){
     while (runningState){
-        on_preFrame();
+       
         while(SDL_PollEvent(VeloEvent))
         {if ((*VeloEvent).type == SDL_EventType::SDL_EVENT_QUIT){
             runningState=false;
+          
         }}
-        on_postFrame();
+       
         SDL_SetRenderDrawColor(VeloRender,255,255,255,SDL_ALPHA_OPAQUE);
         
         SDL_RenderClear(VeloRender);
@@ -52,13 +60,11 @@ void Velo::registerComponent(Component child){
 
 Velo::~Velo(){
 
-
+delete VeloEvent;
 
 SDL_DestroyRenderer(VeloRender);
-
-    SDL_DestroyWindow(VeloWindow);
-
-    velog->fail("flow");
+SDL_DestroyWindow(VeloWindow);
+velog->fail("Destroying objects and freeing memory");
 }
 
     
