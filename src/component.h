@@ -3,7 +3,9 @@
 #endif
 
 class Component{
+
     public :
+        virtual void getparent();
         virtual void on_draw();
 };
 
