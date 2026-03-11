@@ -2,6 +2,7 @@
 #define VELO_H
 #include <SDL3/SDL_video.h>
 #endif
+
 #include <vector>
 #include <SDL3/SDL.h>
 #include <iostream>
@@ -17,12 +18,12 @@ class Velo{
         std::unique_ptr<SDL_Renderer> VeloRender;
         SDL_Event* VeloEvent;
         bool runningState;
-        
         void privateFrame();
+
 
     public:
         Velo(); 
-        virtual void on_init()=0;
+        virtual 0void on_init()=0;
 
         virtual void on_preFrame()=0;
 
